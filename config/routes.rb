@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   
   get 'users/new'   => 'users/new'
-  get 'users/edit'  => 'users#edit'
   post 'users' => 'users#create'
+  get 'users/:id/edit' => 'users#edit'
   get 'users/:id'  => "users#show"
-  
+  post 'users/:id' => 'users#update'
+  delete 'users/:id' => 'users#delete' 
+
 
   get 'sessions/new'   => 'sessions#new'
   post '/create'  => 'sessions#create'
