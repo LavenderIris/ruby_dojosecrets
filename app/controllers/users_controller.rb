@@ -55,6 +55,7 @@ class UsersController < ApplicationController
   def isValidUser
     if User.find(params[:id]) != current_user
       redirect_to '/users/#{session[:user_id]}'
+    end
   end
 
 end

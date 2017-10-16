@@ -9,8 +9,19 @@ RSpec.describe SecretsController, type: :controller do
     before do
       session[:user_id] = nil
     end
-    it "cannot access index"
-    it "cannot access create"
-    it "cannot access destroy"
+    it "cannot access index" do
+        get :index, id: @user
+        expect(response).to redirect_to("/sessions/new")
+    end
+
+    it "cannot access create" do
+        get :create, id: @user
+        expect(response).to redirect_to("/sessions/new")
+    end
+
+    it "cannot access destroy" do
+        delete :destroy, id: @user
+        expect(response).to redirect_to("/sessions/new")
+    end
   end
 end

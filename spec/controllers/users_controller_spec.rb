@@ -3,6 +3,7 @@ RSpec.describe UsersController, type: :controller do
   before do
     @user = create(:user)
   end
+
   context "when not logged in" do
     before do
       session[:user_id] = nil
@@ -11,8 +12,20 @@ RSpec.describe UsersController, type: :controller do
       get :show, id: @user
       expect(response).to redirect_to("/sessions/new")
     end
-    it "cannot access edit"
-    it "cannot access update"
-    it "cannot access destroy"
+
+    it "cannot access edit" do
+        get :edit, id: @user
+        expect(response).to redirect_to("/sessions/new")
+    end
+    
+    it "cannot access update" do
+        get :update, id: @user
+        expect(response).to redirect_to("/sessions/new")
+    end
+
+    it "cannot access destroy" do
+        delete :delete, id: @user
+        expect(response).to redirect_to("/sessions/new")
+    end
   end
 end
