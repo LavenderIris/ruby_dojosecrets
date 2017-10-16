@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
-  
+  skip_before_action :require_login, :isValidUser, only: [:new, :create]
+ 
+
   def new
   end
   
@@ -49,4 +50,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+
+  private
+  def isValidUser
+    redirect_to 'users/'+ current_user.id unless params[:id] == current_user.id
+  end
+
 end
