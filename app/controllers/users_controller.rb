@@ -51,9 +51,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  private
+  
   def isValidUser
-    redirect_to 'users/'+ current_user.id unless params[:id] == current_user.id
+    if User.find(params[:id]) != current_user
+      redirect_to '/users/#{session[:user_id]}'
   end
 
 end
