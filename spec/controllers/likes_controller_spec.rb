@@ -20,4 +20,19 @@ RSpec.describe LikesController, type: :controller do
     end
 
   end
+
+  context "when signed in as the wrong user" do
+    
+    before do
+        @wrong_user = create(:user, email: "wrong@user.com")
+        session[:user_id] = @wrong_user.id
+    end
+
+    it "shouldn't be able to destroy a like that isn't yours" do
+        delete :destroy, id: @like.id
+        expect(response).to redirect_to("/secrets")
+
+    end
+  end 
+
 end
